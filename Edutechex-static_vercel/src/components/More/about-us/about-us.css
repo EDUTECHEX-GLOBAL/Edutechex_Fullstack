@@ -1,0 +1,550 @@
+/* ================================================================
+   ABOUT US — CSS (FULLY RESPONSIVE)
+   ================================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.about-container {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  color: #1e293b;
+}
+
+.deco {
+  position: absolute;
+  pointer-events: none;
+  font-weight: 400;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SECTION 1 — QUOTES HERO
+════════════════════════════════════════════════════════════════ */
+
+.quotes-section {
+  position: relative;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 600px;
+}
+
+.top-quote-row {
+  width: 100%;
+  padding: 80px 14% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.top-quote-text {
+  font-size: 37px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.45;
+  max-width: 1100px;
+}
+
+.curly-arrow {
+  width: 220px;
+  height: 88px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  align-self: center;
+  margin-left: -450px;
+}
+
+.image-center-row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0 5%;
+  position: relative;
+}
+
+.student-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin: 1px;
+  border-radius: 10px;
+}
+
+.deco-plus-top  { top: 40px;  left: 40px;   font-size: 35px; color: #fe8732; font-weight: 600; }
+.deco-star-top  { top: 38px;  right: 220px;  font-size: 28px; color: #f97316; }
+.deco-x-right   { top: 250px; right: 150px;  font-size: 18px; color: #ef4444; font-weight: 1000; -webkit-text-stroke: 3px #ef4444; }
+
+/* ════════════════════════════════════════════════════════════════
+   SECTION 2 — INTRODUCING EDUTECHEX
+════════════════════════════════════════════════════════════════ */
+
+.intro-section {
+  background: #ffffff;
+  padding: 80px 80px 0px;
+}
+
+.intro-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.intro-left {
+  flex: 1.2;
+  max-width: 52%;
+}
+
+.intro-title {
+  font-size: 37px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.inline-logo {
+  height: 36px;
+  width: auto;
+  vertical-align: middle;
+}
+
+.intro-box {
+  background: #3d4fba;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+}
+
+.intro-box p {
+  font-size: 14px;
+  color: #ffffff;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.intro-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.intro-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.65;
+}
+
+.about-check-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #3d4fba;
+}
+
+.intro-about-img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  box-shadow: none;
+  display: block;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SECTION 3 — WHAT IS EDUTECHEX
+════════════════════════════════════════════════════════════════ */
+
+.what-section {
+  background: #ffffff;
+  padding: 0px 80px 80px;
+}
+
+.what-inner {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.what-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.flag-img {
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  object-fit: contain;
+}
+
+.what-right { flex: 1; }
+
+.what-title {
+  font-size: 37px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.what-para {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.78;
+  margin: 0;
+}
+
+.what-divider {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 20px 0;
+}
+
+.what-mission {
+  font-size: 21px;
+  font-weight: 600;
+  color: #111;
+  margin-top: 28px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SECTION 4 — VISION & MISSION
+════════════════════════════════════════════════════════════════ */
+
+.vision-section {
+  background: transparent;
+  padding: 60px 80px;
+  position: relative;
+  overflow: visible;
+}
+
+.vision-section::before {
+  content: "";
+  position: absolute;
+  inset: 20px 80px;
+  background: #eef2f8;
+  border-radius: 24px;
+  z-index: 0;
+}
+
+.vision-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.vision-title {
+  font-size: 33px;
+  font-weight: 600;
+  color: #1a1a2e;
+  text-align: center;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.vision-box {
+  border-radius: 24px;
+  padding: 28px 36px;
+  transition: transform 0.2s ease;
+}
+
+.vision-box p { font-size: 15px; color: #ffffff; line-height: 1.78; margin: 0; }
+.vision-box--blue { background: #3d4fba; }
+.vision-box--teal { background: #1ab5b8; }
+
+.deco-plus-vision { top: 36px;  left: 110px;  font-size: 32px; color: #7c3aed; font-weight: 700; z-index: 2; }
+.deco-star-vision { top: 230px; right: 290px; font-size: 30px; color: #f97316; z-index: 2; }
+
+/* ════════════════════════════════════════════════════════════════
+   SECTION 5 — MEET OUR TEAM + OUR STORY
+════════════════════════════════════════════════════════════════ */
+
+.team-section {
+  background: #ffffff;
+  padding: 80px 80px;
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;  /* title on top, body below */
+  align-items: stretch;
+  gap: 0;
+}
+
+.team-title {
+  font-size: 36px;
+  font-weight: 600;
+  color: #1a1a2e;
+  text-align: center;
+  margin-bottom: 48px;
+  width: 100%;
+}
+
+.team-body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 60px;
+  width: 100%;
+}
+
+.team-story {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+.story-title {
+  font-size: 30px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.story-para {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.78;
+  margin: 0;
+}
+
+.story-highlight {
+  color: #3d4fba;
+  font-weight: 700;
+}
+
+.team-grid {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.team-story-img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE — 1024px
+════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+
+  .quotes-section   { min-height: auto; }
+  .top-quote-row    { padding: 64px 8% 0; }
+  .top-quote-text   { font-size: 28px; }
+  .curly-arrow      { width: 160px; height: 64px; margin-left: 10%; }
+  .image-center-row { padding: 0 3%; }
+  .deco-plus-top    { font-size: 28px; left: 24px; top: 28px; }
+  .deco-star-top    { font-size: 22px; right: 100px; top: 28px; }
+  .deco-x-right     { font-size: 14px; right: 60px; top: 180px; }
+
+  .intro-section    { padding: 52px 32px 0px; }
+  .intro-inner      { flex-direction: column; gap: 32px; }
+  .intro-left       { max-width: 100%; }
+  .intro-right      { width: 100%; justify-content: center; }
+  .intro-title      { font-size: 28px; }
+  .intro-about-img  { max-width: 100%; }
+
+  .what-section     { padding: 0px 32px 52px; }
+  .what-inner       { flex-direction: column; gap: 40px; }
+  .what-left,
+  .what-right       { width: 100%; }
+  .flag-img         { max-width: 340px; }
+  .what-title       { font-size: 28px; }
+  .what-mission     { font-size: 18px; }
+
+  .vision-section   { padding: 52px 32px; }
+  .vision-section::before { inset: 16px 32px; }
+  .vision-title     { font-size: 26px; }
+  .vision-box       { padding: 22px 28px; }
+  .deco-plus-vision { left: 52px; top: 28px; font-size: 26px; }
+  .deco-star-vision { right: 52px; top: 200px; font-size: 24px; }
+
+  .team-section     { padding: 52px 32px; }
+  .team-title       { font-size: 28px; margin-bottom: 36px; }
+  .team-body        { gap: 40px; }
+  .story-title      { font-size: 24px; }
+  .team-story-img   { max-width: 100%; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE — 768px
+════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  .top-quote-row    { padding: 56px 6% 0; }
+  .top-quote-text   { font-size: 22px; }
+  .curly-arrow      { width: 130px; height: 52px; margin-left: 5%; }
+  .deco-plus-top    { font-size: 22px; left: 16px; top: 20px; }
+  .deco-star-top    { font-size: 18px; right: 40px; top: 20px; }
+  .deco-x-right     { font-size: 13px; right: 20px; top: 160px; -webkit-text-stroke: 2px #ef4444; }
+
+  .intro-section    { padding: 44px 24px 0px; }
+  .intro-title      { font-size: 24px; }
+  .intro-box p      { font-size: 13px; }
+  .intro-list li    { font-size: 13px; }
+
+  .what-section     { padding: 0px 24px 44px; }
+  .what-title       { font-size: 24px; }
+  .what-para        { font-size: 14px; }
+  .what-mission     { font-size: 16px; }
+  .flag-img         { max-width: 260px; }
+
+  .vision-section   { padding: 44px 20px; }
+  .vision-section::before { inset: 14px 20px; }
+  .vision-title     { font-size: 22px; }
+  .vision-box p     { font-size: 14px; }
+  .deco-plus-vision { left: 36px; top: 24px; font-size: 22px; }
+  .deco-star-vision { right: 36px; top: 180px; font-size: 20px; }
+
+  /* ── TEAM SECTION MOBILE FIX ── */
+  .team-section     { padding: 44px 24px; }
+  .team-title       { font-size: 24px; margin-bottom: 28px; text-align: center; }
+
+  /* Stack story text ABOVE image on mobile */
+  .team-body        {
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .team-story       { width: 100%; gap: 16px; padding-top: 0; }
+  .story-title      { font-size: 22px; }
+  .story-para       { font-size: 14px; }
+
+  .team-grid        { width: 100%; justify-content: center; }
+  .team-story-img   { max-width: 100%; width: 100%; border-radius: 10px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE — 640px
+════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+
+  .quotes-section   { min-height: auto; }
+  .top-quote-row    { padding: 48px 5% 0; }
+  .top-quote-text   { font-size: 18px; }
+  .curly-arrow      { width: 110px; height: 44px; margin-left: 0; align-self: flex-start; }
+  .student-img      { width: 95%; border-radius: 8px; }
+  .deco-plus-top    { font-size: 20px; left: 12px; top: 16px; }
+  .deco-star-top    { font-size: 16px; right: 20px; top: 16px; }
+  .deco-x-right     { font-size: 12px; right: 14px; top: 140px; -webkit-text-stroke: 2px #ef4444; }
+
+  .intro-section    { padding: 36px 16px 0px; }
+  .intro-title      { font-size: 20px; }
+  .inline-logo      { height: 26px; }
+  .intro-box        { padding: 16px 18px; }
+  .intro-box p      { font-size: 13px; }
+  .intro-list       { gap: 16px; }
+  .intro-list li    { font-size: 13px; }
+  .about-check-icon { font-size: 16px; }
+
+  .what-section     { padding: 0px 16px 36px; }
+  .what-title       { font-size: 20px; }
+  .what-para        { font-size: 13px; }
+  .what-mission     { font-size: 15px; margin-top: 20px; }
+  .flag-img         { max-width: 220px; }
+  .what-inner       { gap: 28px; }
+
+  .vision-section   { padding: 36px 12px; }
+  .vision-section::before { inset: 10px 12px; border-radius: 18px; }
+  .vision-title     { font-size: 18px; }
+  .vision-box       { padding: 18px 20px; border-radius: 18px; }
+  .vision-box p     { font-size: 13px; }
+  .vision-inner     { gap: 20px; }
+  .deco-plus-vision { left: 24px; top: 20px; font-size: 20px; }
+  .deco-star-vision { right: 24px; top: 160px; font-size: 18px; }
+
+  .team-section     { padding: 36px 16px; }
+  .team-title       { font-size: 20px; margin-bottom: 24px; }
+  .team-body        { gap: 24px; }
+  .story-title      { font-size: 20px; }
+  .story-para       { font-size: 13px; }
+  .team-story       { gap: 14px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE — 400px
+════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 400px) {
+
+  .top-quote-row    { padding: 40px 4% 0; }
+  .top-quote-text   { font-size: 16px; }
+  .curly-arrow      { width: 90px; height: 36px; }
+  .deco-plus-top    { font-size: 18px; left: 10px; top: 14px; }
+  .deco-star-top    { font-size: 14px; right: 14px; top: 14px; }
+  .deco-x-right     { font-size: 11px; right: 10px; top: 120px; -webkit-text-stroke: 1.5px #ef4444; }
+
+  .intro-section    { padding: 28px 12px 0px; }
+  .intro-title      { font-size: 18px; }
+  .inline-logo      { height: 22px; }
+
+  .what-section     { padding: 0px 12px 28px; }
+  .what-title       { font-size: 18px; }
+  .flag-img         { max-width: 180px; }
+
+  .vision-section   { padding: 28px 10px; }
+  .vision-section::before { inset: 8px 10px; border-radius: 14px; }
+  .vision-title     { font-size: 16px; }
+  .vision-box       { padding: 14px 16px; border-radius: 14px; }
+  .vision-box p     { font-size: 12px; }
+  .deco-plus-vision { left: 18px; top: 16px; font-size: 18px; }
+  .deco-star-vision { right: 18px; top: 140px; font-size: 16px; }
+
+  .team-section     { padding: 28px 12px; }
+  .team-title       { font-size: 18px; }
+  .story-title      { font-size: 18px; }
+  .story-para       { font-size: 12px; }
+  .team-story       { gap: 12px; }
+}

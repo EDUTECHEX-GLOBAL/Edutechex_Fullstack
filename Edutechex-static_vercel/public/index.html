@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- NOTE: canonical / og:url / twitter:url were removed from this shared file.
+         This is a single-page app, so a hardcoded homepage canonical would be applied
+         to EVERY route (/sat/pay, /sat/mock-tests ...). Set them per page with
+         react-helmet-async instead (see README_CHANGES.md). -->
+
+    <!-- ✅ Favicons -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- ✅ Viewport & Theme -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- ✅ Primary SEO Meta Tags -->
+    <meta name="description" content="Unlock your passion and get it mapped to 10K+ courses & 5K+ global universities and companies through scientific methodologies." />
+    <meta name="keywords" content="EDUTECHEX, online courses, K12, undergraduate, postgraduate, internships, STEM labs, AP courses, SAT, career navigation" />
+    <meta name="author" content="EDUTECHEX" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- ✅ Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="EDUTECHEX – Courses, Internships, STEM Labs & Career Programs" />
+    <meta property="og:description" content="Unlock your passion and get it mapped to 10K+ courses & 5K+ global universities and companies through scientific methodologies." />
+    <meta property="og:image" content="https://www.edutechex.com/android-chrome-512x512.png" />
+    <meta property="og:site_name" content="EDUTECHEX" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ✅ Twitter Card
+         Changed to "summary" because the image is a 512x512 square.
+         When you create a 1200x630 /og-image.png, switch back to summary_large_image
+         and point og:image / twitter:image to it. -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="EDUTECHEX – Courses, Internships, STEM Labs & Career Programs" />
+    <meta name="twitter:description" content="Unlock your passion and get it mapped to 10K+ courses & 5K+ global universities and companies through scientific methodologies." />
+    <meta name="twitter:image" content="https://www.edutechex.com/android-chrome-512x512.png" />
+
+    <!-- ✅ PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- ✅ Structured Data (JSON-LD) for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "EDUTECHEX",
+      "url": "https://www.edutechex.com",
+      "logo": "https://www.edutechex.com/android-chrome-512x512.png",
+      "description": "Unlock your passion and get it mapped to 10K+ courses & 5K+ global universities and companies through scientific methodologies.",
+      "sameAs": [
+        "https://www.linkedin.com/company/edutechex",
+        "https://www.instagram.com/edutechex",
+        "https://www.facebook.com/edutechex"
+      ]
+    }
+    </script>
+
+    <title>EDUTECHEX - Unlock Your Potential</title>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>

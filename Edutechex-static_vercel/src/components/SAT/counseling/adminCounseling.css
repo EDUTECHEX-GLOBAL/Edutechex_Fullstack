@@ -1,0 +1,270 @@
+/* ==========================================================================
+   ADMIN COUNSELING DASHBOARD STYLES – EDUTECHEX
+   ========================================================================== */
+
+.adm-page {
+  min-height: 100vh;
+  background: #f4f6fa;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 24px 16px 60px;
+  color: #1e293b;
+}
+.adm-container { max-width: 900px; margin: 0 auto; }
+
+.adm-header { margin-bottom: 20px; }
+.adm-title { font-size: 24px; font-weight: 800; color: #0f172a; margin: 0 0 4px; }
+.adm-sub { font-size: 13px; color: #64748b; margin: 0; }
+
+.adm-message {
+  padding: 10px 16px;
+  background: #eff6ff;
+  color: #2563eb;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Tabs */
+.adm-tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 2px solid #e2e8f0; }
+.adm-tab-btn {
+  padding: 10px 18px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  border-radius: 6px 6px 0 0;
+  transition: color 0.18s;
+  text-transform: capitalize;
+}
+.adm-tab-btn.is-active { color: #2563eb; border-bottom-color: #2563eb; }
+.adm-tab-btn:hover:not(.is-active) { color: #334155; }
+
+/* Panel */
+.adm-panel {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+/* Toolbar */
+.adm-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.adm-filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+.adm-filter-btn {
+  padding: 5px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 999px;
+  background: #f8fafc;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: capitalize;
+}
+.adm-filter-btn.is-active, .adm-filter-btn:hover { background: #2563eb; border-color: #2563eb; color: #fff; }
+.adm-refresh-btn {
+  padding: 7px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.adm-refresh-btn:hover { background: #e2e8f0; }
+
+/* Loading / Empty */
+.adm-loading, .adm-empty { text-align: center; padding: 32px 0; font-size: 14px; color: #64748b; }
+
+/* Bookings list */
+.adm-bookings-list { display: flex; flex-direction: column; gap: 12px; }
+.adm-booking-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  background: #f8fafc;
+}
+.adm-booking-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.adm-booking-student { font-size: 15px; font-weight: 700; color: #0f172a; }
+.adm-booking-email { font-size: 12px; color: #64748b; margin-top: 2px; }
+.adm-status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-transform: capitalize;
+  flex-shrink: 0;
+}
+.adm-status-badge.is-active { background: #dcfce7; color: #15803d; }
+.adm-status-badge.is-inactive { background: #f1f5f9; color: #64748b; }
+
+.adm-booking-details { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.adm-detail-row { display: flex; gap: 12px; font-size: 13px; align-items: baseline; }
+.adm-detail-label { color: #64748b; font-weight: 500; min-width: 90px; flex-shrink: 0; }
+.adm-detail-val { color: #1e293b; font-weight: 600; }
+
+.adm-booking-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.adm-action-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.adm-action-btn.is-confirm { background: #dcfce7; color: #15803d; }
+.adm-action-btn.is-complete { background: #ede9fe; color: #6366f1; }
+.adm-action-btn.is-noshow { background: #f1f5f9; color: #64748b; }
+.adm-action-btn.is-cancel { background: #fee2e2; color: #ef4444; }
+.adm-action-btn:hover { opacity: 0.85; }
+
+/* Forms */
+.adm-add-btn {
+  padding: 9px 18px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.adm-add-btn:hover:not(:disabled) { background: #1d4ed8; }
+.adm-add-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.adm-cancel-btn {
+  padding: 9px 18px;
+  background: #f1f5f9;
+  color: #334155;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.adm-cancel-btn:hover { background: #e2e8f0; }
+
+.adm-form-card {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.adm-form-title { font-size: 15px; font-weight: 700; color: #0f172a; margin: 0 0 14px; }
+.adm-sub-title { font-size: 14px; font-weight: 700; color: #334155; margin: 0 0 10px; }
+.adm-form-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+.adm-form-row label { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.4px; }
+.adm-input {
+  padding: 9px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 7px;
+  font-size: 14px;
+  color: #1e293b;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+.adm-input:focus { border-color: #2563eb; }
+.adm-checkbox-row { flex-direction: row !important; align-items: center; gap: 8px !important; }
+.adm-checkbox-row label { text-transform: none !important; letter-spacing: 0 !important; font-size: 13px !important; color: #334155 !important; }
+.adm-form-actions { display: flex; gap: 10px; align-items: center; margin-top: 4px; }
+
+/* Counselors list */
+.adm-counselors-list { display: flex; flex-direction: column; gap: 10px; }
+.adm-counselor-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+.adm-counselor-avatar-sm {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.adm-counselor-meta { flex: 1; }
+.adm-counselor-name { font-size: 14px; font-weight: 700; color: #0f172a; }
+.adm-counselor-email { font-size: 12px; color: #64748b; margin-top: 2px; }
+.adm-counselor-schedule { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+
+/* Slots */
+.adm-slots-add-section { margin-bottom: 24px; }
+.adm-block-section { margin-top: 8px; }
+.adm-slot-input-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
+.adm-add-slot-btn {
+  padding: 9px 16px;
+  background: #f1f5f9;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.adm-add-slot-btn:hover { background: #e2e8f0; }
+
+.adm-pending-slots { margin-top: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; }
+.adm-pending-label { font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
+.adm-pending-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+.adm-pending-slot-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #334155;
+  padding: 6px 10px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+.adm-remove-slot-btn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+@media (max-width: 600px) {
+  .adm-page { padding: 14px 10px 48px; }
+  .adm-panel { padding: 16px 12px; }
+  .adm-slot-input-row { flex-direction: column; }
+  .adm-slot-input-row .adm-form-row { width: 100%; }
+}
+

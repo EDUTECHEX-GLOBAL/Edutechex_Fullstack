@@ -1,0 +1,223 @@
+import React, { Component, lazy, Suspense, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+
+import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
+import Home from "./components/home/home";
+import Pariksha from "./components/Products/pariksha";
+
+import Internships from "./components/Consulting/internships/internships";
+import StemLabs from "./components/Consulting/stem-labs/stem-labs";
+import Information from "./components/Consulting/Information/information";
+
+import AboutUs from "./components/More/about-us/about-us";
+import ContactUs from "./components/More/Contact-us/contact-us";
+import Testimonails from "./components/More/Testimonails/testimonails";
+
+import Shop from "./components/buycourses/shop";
+import Policy from "./components/policy/policy";
+import Terms from "./components/terms/terms";
+
+import K12 from "./components/courses/k12/k12";
+import Undergraduate from "./components/courses/undergraduate/undergraduate";
+import Postgraduate from "./components/courses/postgraduate/postgraduate";
+import { Registration, Login, VerifyOtp, SatDashboard, TestInstructions, MockTest, Results, SatNotFound } from "./components/SAT/SatExperience";
+import SatSubscription from "./components/SAT-subscription/pay";
+import CounselingBooking from "./components/SAT/counseling/CounselingBooking";
+import AdminCounseling from "./components/SAT/counseling/AdminCounseling";
+
+function lazyWithChunkRecovery(importer) {
+  return lazy(async () => {
+    const recoveryKey = `chunk-reload:${window.location.pathname}`;
+
+    try {
+      const module = await importer();
+      window.sessionStorage.removeItem(recoveryKey);
+      return module;
+    } catch (error) {
+      try {
+        if (!window.sessionStorage.getItem(recoveryKey)) {
+          window.sessionStorage.setItem(recoveryKey, "1");
+          window.location.reload();
+        }
+      } catch {
+        // Storage can be unavailable in privacy-restricted browsing modes.
+      }
+
+      throw error;
+    }
+  });
+}
+
+class RouteErrorBoundary extends Component {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <main className="route-error" role="alert">
+          <h1>This page couldn’t load</h1>
+          <p>Please check your connection and try again.</p>
+          <button type="button" onClick={() => window.location.reload()}>
+            Reload page
+          </button>
+        </main>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+// Keep admission routes split into small, on-demand bundles.
+const IvyLeague = lazyWithChunkRecovery(() => import("./components/Ivy-League-admission/Ivy-League"));
+const CanadaAdmission = lazyWithChunkRecovery(() => import("./components/canada-admission/canada"));
+const AustraliaNzAdmission = lazyWithChunkRecovery(() => import("./components/australia-nz-admission/australia-nz"));
+const MedicalAdmission = lazyWithChunkRecovery(() => import("./components/Medical-admission/medical"));
+const UKUndergraduate = lazyWithChunkRecovery(() => import("./components/UK-Undergraduate/UK-Undergraduate"));
+const USAAdmission = lazyWithChunkRecovery(() => import("./components/USA-admission/usa"));
+const Career = lazyWithChunkRecovery(() => import("./components/Career-admission/Career"));
+
+function ScrollToTop() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location.pathname]);
+
+  return null;
+}
+
+function AppContent() {
+  const location = useLocation();
+  const isSatRoute = location.pathname.startsWith("/sat");
+
+  return (
+    <>
+      <ScrollToTop />
+      {!isSatRoute && <Header />}
+
+      <RouteErrorBoundary>
+      <Suspense fallback={<main className="route-loading" role="status">Loading page…</main>}>
+      <Routes>
+        {/* ================= HOME ================= */}
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+
+        {/* ================= PRODUCTS ================= */}
+        <Route path="/pariksha" element={<Pariksha />} />
+
+        {/* ================= SAT MOCK TEST PROTOTYPE ================= */}
+        <Route path="/sat/register" element={<Registration />} />
+        <Route path="/sat/login" element={<Login />} />
+        <Route path="/sat/verify-otp" element={<VerifyOtp />} />
+        <Route path="/sat/dashboard" element={<SatDashboard />} />
+        <Route path="/dashboard" element={<Navigate to="/sat/dashboard" replace />} />
+        <Route path="/sat/mock-tests" element={<SatDashboard initialTab="papers" />} />
+        <Route path="/sat/subscription" element={<SatSubscription />} />
+        <Route path="/sat/mock-tests/:testId/instructions" element={<TestInstructions />} />
+        <Route path="/sat/mock-tests/:testId/start" element={<TestInstructions />} />
+        <Route path="/sat/mock-tests/:testId/attempt" element={<MockTest />} />
+        <Route path="/sat/mock-tests/:testId" element={<TestInstructions />} />
+        <Route path="/sat/results/:attemptId" element={<Results />} />
+        <Route path="/sat/counseling" element={<CounselingBooking />} />
+        <Route path="/sat/admin/counseling" element={<AdminCounseling />} />
+        <Route path="/sat/*" element={<SatNotFound />} />
+
+        {/* ================= CONSULTING ================= */}
+        <Route
+          path="/consulting/internships"
+          element={<Internships />}
+        />
+
+        <Route
+          path="/consulting/stem-labs"
+          element={<StemLabs />}
+        />
+
+        <Route
+          path="/consulting/information-technology"
+          element={<Information />}
+        />
+
+        {/* ================= MORE ================= */}
+        <Route path="/about" element={<AboutUs />} />
+
+        <Route path="/contact" element={<ContactUs />} />
+
+        <Route
+          path="/testimonials"
+          element={<Testimonails />}
+        />
+
+        {/* ================= BUY COURSES ================= */}
+        <Route path="/buy-courses" element={<Shop />} />
+
+        {/* ================= COURSES ================= */}
+        <Route path="/courses/k12" element={<K12 />} />
+
+        <Route
+          path="/courses/undergraduate"
+          element={<Undergraduate />}
+        />
+
+        <Route
+          path="/courses/postgraduate"
+          element={<Postgraduate />}
+        />
+
+        {/* ================= IVY LEAGUE ================= */}
+        <Route
+          path="/ivy-league"
+          element={<IvyLeague />}
+        />
+
+        {/* ================= OTHER ADMISSIONS ================= */}
+        <Route path="/canada-admission" element={<CanadaAdmission />} />
+        <Route path="/australia-nz-admission" element={<AustraliaNzAdmission />} />
+        <Route path="/medical-admission" element={<MedicalAdmission />} />
+        <Route path="/uk-undergraduate" element={<UKUndergraduate />} />
+        <Route path="/usa-admission" element={<USAAdmission />} />
+        <Route path="/career-admission" element={<Career />} />
+
+        {/* ================= LEGAL / POLICIES ================= */}
+        <Route path="/privacy-policy" element={<Policy />} />
+        <Route path="/policy" element={<Policy />} />
+        <Route path="/privacy" element={<Policy />} />
+        <Route path="/terms-and-conditions" element={<Terms />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/terms-conditions" element={<Terms />} />
+
+        {/* ================= UNKNOWN ROUTES ================= */}
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
+      </Routes>
+      </Suspense>
+      </RouteErrorBoundary>
+
+      {!isSatRoute && <Footer />}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+export default App;

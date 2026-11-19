@@ -1,0 +1,1735 @@
+/* ==========================================================================
+   SAT COUNSELING BOOKING STYLES – EDUTECHEX
+   Exact recreation of the reference design (mock test selection & guidance)
+   ========================================================================== */
+
+:root {
+  --csl-primary: #2563eb;
+  --csl-primary-dark: #1d4ed8;
+  --csl-primary-light: #eff6ff;
+  --csl-success: #16a34a;
+  --csl-success-light: #dcfce7;
+  --csl-navy: #0f172a;
+  --csl-navy-light: #1e293b;
+  --csl-gray-50: #f8fafc;
+  --csl-gray-100: #f1f5f9;
+  --csl-gray-200: #e2e8f0;
+  --csl-gray-300: #cbd5e1;
+  --csl-gray-400: #94a3b8;
+  --csl-gray-500: #64748b;
+  --csl-gray-700: #334155;
+  --csl-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --csl-radius-lg: 20px;
+  --csl-radius-md: 14px;
+  --csl-radius-sm: 8px;
+  --csl-shadow-card: 0 10px 30px rgba(37, 99, 235, 0.05), 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ── Page Layout ── */
+.csl-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f0f7ff 0%, #e8f3fe 280px, #f6faff 600px, #f8fafc 100%);
+  font-family: var(--csl-font);
+  color: var(--csl-navy);
+  padding: 0 0 80px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Top Navbar ── */
+.csl-navbar {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.csl-navbar-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.csl-navbar-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.csl-navbar-logo {
+  height: 38px;
+  max-width: 200px;
+  object-fit: contain;
+  display: block;
+}
+
+.csl-navbar-divider {
+  color: #cbd5e1;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.csl-navbar-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid var(--csl-gray-200);
+  border-radius: 999px;
+  padding: 4px 12px 4px 4px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.csl-navbar-user:hover {
+  border-color: var(--csl-primary);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+}
+
+.csl-navbar-user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--csl-primary);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.csl-navbar-user-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--csl-navy-light);
+}
+
+.csl-navbar-user-chevron {
+  color: var(--csl-gray-400);
+  margin-left: 2px;
+}
+
+/* ── Container ── */
+.csl-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 24px 0;
+  position: relative;
+}
+
+/* ── Hero & Illustration Section ── */
+.csl-header-hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 10px 0 24px;
+  margin-bottom: 8px;
+}
+
+.csl-header-text {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-width: 320px;
+}
+
+.csl-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--csl-primary);
+  text-decoration: none;
+  margin-bottom: 12px;
+  transition: opacity 0.18s;
+}
+
+.csl-back-link:hover {
+  text-decoration: underline;
+  opacity: 0.85;
+}
+
+.csl-page-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--csl-navy);
+  margin: 0 0 8px;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.csl-page-subtitle {
+  font-size: 14px;
+  color: var(--csl-gray-500);
+  line-height: 1.55;
+  margin: 0 0 22px;
+  max-width: 580px;
+}
+
+/* Hero Art Illustration on Right */
+.csl-hero-art {
+  position: relative;
+  flex-shrink: 0;
+  width: 340px;
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.csl-hero-art-backdrop {
+  position: absolute;
+  right: -30px;
+  bottom: 0;
+  width: 360px;
+  height: 200px;
+  background: radial-gradient(ellipse at bottom right, rgba(191, 219, 254, 0.5) 0%, rgba(224, 242, 254, 0.25) 50%, transparent 75%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.csl-hero-art-img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 330px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .csl-hero-art {
+    display: none;
+  }
+}
+
+/* ── Step Indicator ── */
+.csl-steps-wrap {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  user-select: none;
+}
+
+.csl-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.csl-step.is-clickable {
+  cursor: pointer;
+}
+
+.csl-step.is-clickable:hover .csl-step-label {
+  color: var(--csl-primary);
+  text-decoration: underline;
+}
+
+.csl-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid var(--csl-gray-300);
+  color: var(--csl-gray-500);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.csl-step.is-current .csl-step-num {
+  background: var(--csl-primary);
+  border-color: var(--csl-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+}
+
+.csl-step.is-done .csl-step-num {
+  background: var(--csl-success);
+  border-color: var(--csl-success);
+  color: #ffffff;
+}
+
+.csl-step-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--csl-gray-500);
+  white-space: nowrap;
+}
+
+.csl-step.is-current .csl-step-label {
+  color: var(--csl-navy);
+  font-weight: 800;
+}
+
+.csl-step.is-done .csl-step-label {
+  color: var(--csl-success);
+  font-weight: 700;
+}
+
+.csl-step-line {
+  width: 32px;
+  height: 1.5px;
+  background: var(--csl-gray-300);
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+
+/* ── Main Step Panel ── */
+.csl-step-panel {
+  background: #ffffff;
+  border-radius: var(--csl-radius-lg);
+  box-shadow: var(--csl-shadow-card);
+  border: 1.5px solid #e0edfd;
+  padding: 32px 32px 36px;
+  position: relative;
+}
+
+/* Panel Header with Document / Step Icon */
+.csl-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.csl-panel-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--csl-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.csl-badge-doc {
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+}
+
+.csl-badge-blue {
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  color: var(--csl-primary);
+}
+
+.csl-panel-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.csl-panel-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--csl-navy);
+  margin: 0 0 3px;
+  letter-spacing: -0.015em;
+}
+
+.csl-panel-sub {
+  font-size: 13.5px;
+  color: var(--csl-gray-500);
+  margin: 0;
+}
+
+.csl-pill-green {
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ── STEP 1: Eligibility Grid & Cards ── */
+.csl-eligibility-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .csl-eligibility-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.csl-eligibility-card {
+  border: 1.5px solid var(--csl-gray-200);
+  border-radius: 16px;
+  padding: 22px;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.csl-eligibility-card.is-selected {
+  border: 2px solid var(--csl-primary);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+}
+
+.csl-eligibility-card.is-booked-card {
+  background: #ffffff;
+  border-color: var(--csl-gray-200);
+}
+
+.csl-card-selected-corner-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--csl-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+  z-index: 5;
+}
+
+.csl-eligibility-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.csl-elig-mock-pill {
+  background: #e0f2fe;
+  color: #0284c7;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.csl-elig-price-pill {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.csl-elig-price-pill.is-free {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.csl-elig-price-pill.is-paid {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.csl-elig-title {
+  font-size: 17.5px;
+  font-weight: 800;
+  color: var(--csl-navy);
+  margin: 0 0 16px;
+}
+
+.csl-elig-scores {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  background: var(--csl-gray-50);
+  border: 1px solid var(--csl-gray-200);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.csl-elig-score-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.csl-elig-score-label {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: var(--csl-gray-500);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.csl-elig-score-val {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--csl-navy);
+}
+
+.csl-already-booked-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #15803d;
+  font-weight: 700;
+  background: #dcfce7;
+  padding: 11px 14px;
+  border-radius: 9px;
+  margin-top: auto;
+}
+
+.csl-booked-check-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.csl-book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 18px;
+  background: var(--csl-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  text-decoration: none;
+  margin-top: auto;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.csl-book-btn:hover {
+  background: var(--csl-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+/* ── STEP 2: Counselor Card ── */
+.csl-counselor-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.csl-counselor-card {
+  border: 1.5px solid var(--csl-gray-200);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  position: relative;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  width: 100%;
+}
+
+.csl-counselor-card:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
+}
+
+.csl-counselor-card.is-selected {
+  border: 2px solid var(--csl-primary);
+  background: #f8fbff;
+}
+
+.csl-counselor-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--csl-primary);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.csl-counselor-info {
+  flex: 1;
+  min-width: 0;
+  padding-right: 30px;
+}
+
+.csl-counselor-name {
+  font-size: 17.5px;
+  font-weight: 800;
+  color: var(--csl-navy);
+  margin: 0 0 4px;
+}
+
+.csl-counselor-spec {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--csl-primary);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.csl-counselor-bio {
+  font-size: 13px;
+  color: var(--csl-gray-500);
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.csl-counselor-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.csl-day-chip {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  background: var(--csl-gray-100);
+  color: var(--csl-gray-700);
+  border-radius: 6px;
+}
+
+.csl-selected-check {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--csl-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── STEP 3: Date Carousel & Time Slots ── */
+.csl-date-carousel-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.csl-carousel-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid var(--csl-gray-300);
+  color: var(--csl-gray-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.16s ease;
+}
+
+.csl-carousel-arrow:hover {
+  background: var(--csl-gray-100);
+  border-color: var(--csl-primary);
+  color: var(--csl-primary);
+}
+
+.csl-date-carousel {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 4px 2px;
+  flex: 1;
+}
+
+.csl-date-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.csl-date-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1.5px solid var(--csl-gray-200);
+  border-radius: 12px;
+  cursor: pointer;
+  min-width: 66px;
+  transition: all 0.16s ease;
+  flex-shrink: 0;
+}
+
+.csl-date-chip:hover {
+  border-color: var(--csl-primary);
+  background: #f8fbff;
+}
+
+.csl-date-chip.is-selected {
+  background: var(--csl-primary);
+  border-color: var(--csl-primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.csl-chip-day {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--csl-gray-500);
+  letter-spacing: 0.3px;
+}
+
+.csl-chip-num {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--csl-navy);
+}
+
+.csl-chip-month {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--csl-gray-500);
+}
+
+.csl-date-chip.is-selected .csl-chip-day,
+.csl-date-chip.is-selected .csl-chip-num,
+.csl-date-chip.is-selected .csl-chip-month {
+  color: #ffffff;
+}
+
+.csl-slots-heading {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--csl-navy);
+  margin: 0 0 16px;
+}
+
+.csl-slots-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.csl-slot-group-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--csl-gray-500);
+  letter-spacing: 0.5px;
+  margin: 0 0 10px;
+}
+
+.csl-slot-pills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
+}
+
+.csl-slot-pill {
+  padding: 11px 14px;
+  background: #ffffff;
+  border: 1.5px solid var(--csl-gray-200);
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--csl-navy);
+  cursor: pointer;
+  transition: all 0.16s ease;
+  text-align: center;
+}
+
+.csl-slot-pill:hover {
+  border-color: var(--csl-primary);
+  background: #f8fbff;
+}
+
+.csl-slot-pill.is-selected {
+  background: var(--csl-primary);
+  border-color: var(--csl-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.csl-slot-pill.is-booked,
+.csl-slot-pill.is-booked:hover {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.csl-no-slots {
+  background: var(--csl-gray-50);
+  border: 1px dashed var(--csl-gray-300);
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  color: var(--csl-gray-500);
+  font-size: 13.5px;
+  margin-bottom: 24px;
+}
+
+/* ── STEP 4: Review Card ── */
+.csl-review-card {
+  background: var(--csl-gray-50);
+  border: 1.5px solid var(--csl-gray-200);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.csl-review-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--csl-gray-200);
+}
+
+.csl-review-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.csl-review-row.is-total {
+  padding-top: 4px;
+}
+
+.csl-review-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--csl-gray-500);
+}
+
+.csl-review-val-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.csl-review-val-wrap strong {
+  font-size: 14px;
+  color: var(--csl-navy);
+}
+
+.csl-review-change {
+  background: none;
+  border: none;
+  color: var(--csl-primary);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.csl-price-total {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--csl-primary);
+}
+
+/* ── Actions Bar ── */
+.csl-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--csl-gray-200);
+}
+
+.csl-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--csl-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.csl-btn-primary:hover:not(:disabled) {
+  background: var(--csl-primary-dark);
+  transform: translateY(-1px);
+}
+
+.csl-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.csl-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: var(--csl-gray-700);
+  border: 1.5px solid var(--csl-gray-300);
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.csl-btn-secondary:hover {
+  background: var(--csl-gray-50);
+  border-color: var(--csl-gray-400);
+}
+
+/* ── STEP 5: Success Panel ── */
+.csl-success-panel {
+  text-align: center;
+  padding: 44px 32px;
+}
+
+.csl-success-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--csl-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+}
+
+.csl-success-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--csl-navy);
+  margin: 0 0 6px;
+}
+
+.csl-success-sub {
+  font-size: 14px;
+  color: var(--csl-gray-500);
+  margin: 0 0 24px;
+}
+
+.csl-join-link {
+  color: #059669;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.csl-join-link:hover {
+  text-decoration: underline;
+}
+
+/* ── States & Messages ── */
+.csl-loading {
+  text-align: center;
+  padding: 36px 20px;
+  color: var(--csl-gray-500);
+  font-size: 14px;
+}
+
+.csl-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--csl-gray-500);
+}
+
+.csl-empty svg {
+  color: var(--csl-gray-400);
+  margin-bottom: 10px;
+}
+
+.csl-empty h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--csl-navy);
+  margin: 0 0 4px;
+}
+
+.csl-empty p {
+  font-size: 13px;
+  margin: 0;
+}
+
+.csl-form-message {
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.csl-form-message.is-error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.csl-form-message.is-success {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.csl-not-signed-in {
+  max-width: 440px;
+  margin: 80px auto;
+  background: #ffffff;
+  padding: 40px 32px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: var(--csl-shadow-card);
+  border: 1px solid var(--csl-gray-200);
+}
+
+.csl-not-signed-in h2 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 16px;
+  color: var(--csl-navy);
+}
+
+
+/* ── STEP 1: Eligibility Grid & Cards ── */
+.csl-eligibility-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .csl-eligibility-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.csl-eligibility-card {
+  border: 1.5px solid var(--csl-gray-200);
+  border-radius: 16px;
+  padding: 22px;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.csl-eligibility-card.is-selected {
+  border: 2px solid var(--csl-primary);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+}
+
+.csl-eligibility-card.is-booked-card {
+  background: #ffffff;
+  border-color: var(--csl-gray-200);
+}
+
+.csl-card-selected-corner-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--csl-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+  z-index: 5;
+}
+
+.csl-eligibility-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.csl-elig-mock-pill {
+  background: #e0f2fe;
+  color: #0284c7;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.csl-elig-price-pill {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.csl-elig-price-pill.is-free {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.csl-elig-price-pill.is-paid {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.csl-elig-title {
+  font-size: 17.5px;
+  font-weight: 800;
+  color: var(--csl-navy);
+  margin: 0 0 16px;
+}
+
+.csl-elig-scores {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  background: var(--csl-gray-50);
+  border: 1px solid var(--csl-gray-200);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.csl-elig-score-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.csl-elig-score-label {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: var(--csl-gray-500);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.csl-elig-score-val {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--csl-navy);
+}
+
+.csl-already-booked-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #15803d;
+  font-weight: 700;
+  background: #dcfce7;
+  padding: 11px 14px;
+  border-radius: 9px;
+  margin-top: auto;
+}
+
+.csl-booked-check-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.csl-book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 18px;
+  background: var(--csl-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  text-decoration: none;
+  margin-top: auto;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.csl-book-btn:hover {
+  background: var(--csl-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+/* ── STEP 2: Counselor Card ── */
+.csl-counselor-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.csl-counselor-card {
+  border: 1.5px solid var(--csl-gray-200);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  position: relative;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  width: 100%;
+}
+
+.csl-counselor-card:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
+}
+
+.csl-counselor-card.is-selected {
+  border: 2px solid var(--csl-primary);
+  background: #f8fbff;
+}
+
+.csl-counselor-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--csl-primary);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.csl-counselor-info {
+  flex: 1;
+  min-width: 0;
+  padding-right: 30px;
+}
+
+.csl-counselor-name {
+  font-size: 17.5px;
+  font-weight: 800;
+  color: var(--csl-navy);
+  margin: 0 0 4px;
+}
+
+.csl-counselor-spec {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--csl-primary);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.csl-counselor-bio {
+  font-size: 13px;
+  color: var(--csl-gray-500);
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.csl-counselor-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.csl-day-chip {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  background: var(--csl-gray-100);
+  color: var(--csl-gray-700);
+  border-radius: 6px;
+}
+
+.csl-selected-check {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--csl-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── STEP 3: Date Carousel & Time Slots ── */
+.csl-date-carousel-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.csl-carousel-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid var(--csl-gray-300);
+  color: var(--csl-gray-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.16s ease;
+}
+
+.csl-carousel-arrow:hover {
+  background: var(--csl-gray-100);
+  border-color: var(--csl-primary);
+  color: var(--csl-primary);
+}
+
+.csl-date-carousel {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 4px 2px;
+  flex: 1;
+}
+
+.csl-date-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.csl-date-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1.5px solid var(--csl-gray-200);
+  border-radius: 12px;
+  cursor: pointer;
+  min-width: 66px;
+  transition: all 0.16s ease;
+  flex-shrink: 0;
+}
+
+.csl-date-chip:hover {
+  border-color: var(--csl-primary);
+  background: #f8fbff;
+}
+
+.csl-date-chip.is-selected {
+  background: var(--csl-primary);
+  border-color: var(--csl-primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.csl-chip-day {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--csl-gray-500);
+  letter-spacing: 0.3px;
+}
+
+.csl-chip-num {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--csl-navy);
+}
+
+.csl-chip-month {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--csl-gray-500);
+}
+
+.csl-date-chip.is-selected .csl-chip-day,
+.csl-date-chip.is-selected .csl-chip-num,
+.csl-date-chip.is-selected .csl-chip-month {
+  color: #ffffff;
+}
+
+.csl-slots-heading {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--csl-navy);
+  margin: 0 0 16px;
+}
+
+.csl-slots-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.csl-slot-group-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--csl-gray-500);
+  letter-spacing: 0.5px;
+  margin: 0 0 10px;
+}
+
+.csl-slot-pills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
+}
+
+.csl-slot-pill {
+  padding: 11px 14px;
+  background: #ffffff;
+  border: 1.5px solid var(--csl-gray-200);
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--csl-navy);
+  cursor: pointer;
+  transition: all 0.16s ease;
+  text-align: center;
+}
+
+.csl-slot-pill:hover {
+  border-color: var(--csl-primary);
+  background: #f8fbff;
+}
+
+.csl-slot-pill.is-selected {
+  background: var(--csl-primary);
+  border-color: var(--csl-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.csl-slot-pill.is-booked,
+.csl-slot-pill.is-booked:hover {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.csl-no-slots {
+  background: var(--csl-gray-50);
+  border: 1px dashed var(--csl-gray-300);
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  color: var(--csl-gray-500);
+  font-size: 13.5px;
+  margin-bottom: 24px;
+}
+
+/* ── STEP 4: Review Card ── */
+.csl-review-card {
+  background: var(--csl-gray-50);
+  border: 1.5px solid var(--csl-gray-200);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.csl-review-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--csl-gray-200);
+}
+
+.csl-review-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.csl-review-row.is-total {
+  padding-top: 4px;
+}
+
+.csl-review-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--csl-gray-500);
+}
+
+.csl-review-val-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.csl-review-val-wrap strong {
+  font-size: 14px;
+  color: var(--csl-navy);
+}
+
+.csl-review-change {
+  background: none;
+  border: none;
+  color: var(--csl-primary);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.csl-price-total {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--csl-primary);
+}
+
+/* ── Actions Bar ── */
+.csl-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--csl-gray-200);
+}
+
+.csl-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--csl-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.csl-btn-primary:hover:not(:disabled) {
+  background: var(--csl-primary-dark);
+  transform: translateY(-1px);
+}
+
+.csl-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.csl-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #ffffff;
+  color: var(--csl-gray-700);
+  border: 1.5px solid var(--csl-gray-300);
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.csl-btn-secondary:hover {
+  background: var(--csl-gray-50);
+  border-color: var(--csl-gray-400);
+}
+
+/* ── STEP 5: Success Panel ── */
+.csl-success-panel {
+  text-align: center;
+  padding: 44px 32px;
+}
+
+.csl-success-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--csl-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+}
+
+.csl-success-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--csl-navy);
+  margin: 0 0 6px;
+}
+
+.csl-success-sub {
+  font-size: 14px;
+  color: var(--csl-gray-500);
+  margin: 0 0 24px;
+}
+
+.csl-join-link {
+  color: #059669;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.csl-join-link:hover {
+  text-decoration: underline;
+}
+
+/* ── States & Messages ── */
+.csl-loading {
+  text-align: center;
+  padding: 36px 20px;
+  color: var(--csl-gray-500);
+  font-size: 14px;
+}
+
+.csl-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--csl-gray-500);
+}
+
+.csl-empty svg {
+  color: var(--csl-gray-400);
+  margin-bottom: 10px;
+}
+
+.csl-empty h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--csl-navy);
+  margin: 0 0 4px;
+}
+
+.csl-empty p {
+  font-size: 13px;
+  margin: 0;
+}
+
+.csl-form-message {
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.csl-form-message.is-error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.csl-form-message.is-success {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.csl-not-signed-in {
+  max-width: 440px;
+  margin: 80px auto;
+  background: #ffffff;
+  padding: 40px 32px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: var(--csl-shadow-card);
+  border: 1px solid var(--csl-gray-200);
+}
+
+.csl-not-signed-in h2 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 16px;
+  color: var(--csl-navy);
+}
