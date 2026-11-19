@@ -1,0 +1,114 @@
+.sat-score-card-footer.is-purple-meta {
+  color: #7c3aed;
+}
+
+/* ==================== RAW EXAM OUTPUT BANNER ==================== */
+.sat-raw-output-banner {
+  margin-top: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.sat-raw-output-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sat-raw-badge {
+  display: inline-flex;
+  align-items: center;
+  background: #0f172a;
+  color: #f8fafc;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.sat-raw-main-count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.sat-raw-num-highlight {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.sat-raw-denom-highlight {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.sat-raw-pct-highlight {
+  font-size: 13px;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.sat-raw-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sat-raw-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.sat-raw-stat-lbl {
+  color: #64748b;
+  font-size: 11.5px;
+}
+
+.sat-raw-stat-val {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.sat-raw-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.sat-raw-dot.is-green {
+  background: #16a34a;
+}
+
+.sat-raw-dot.is-rose {
+  background: #e11d48;
+}
+
+.sat-raw-dot.is-gray {
+  background: #94a3b8;
+}
+
+.sat-raw-dot.is-blue {
+  background: #2563eb;
+}

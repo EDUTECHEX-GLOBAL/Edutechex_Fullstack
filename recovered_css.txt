@@ -1,0 +1,648 @@
+const fs = require('fs');
+
+const path = 'Edutechex-static_vercel/src/components/SAT/SatExperience.js';
+let content = fs.readFileSync(path, 'utf8');
+
+// Ensure satDashboard.css is imported in SatExperience.js
+if (!content.includes('import "./dashboard/satDashboard.css";')) {
+  content = content.replace('import "./sat.css";', 'import "./sat.css";\nimport "./dashboard/satDashboard.css";');
+  console.log('Added satDashboard.css import');
+}
+
+// 3D Trophy Illustration Component
+const trophyIllustrationCode = `function ResultsTrophyIllustration() {
+  return (
+    <div className="sat-results-trophy-illustration" aria-hidden="true">
+      <svg width="220" height="150" viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Soft Radial Glow */}
+        <ellipse cx="145" cy="75" rx="65" ry="55" fill="#E0F2FE" fillOpacity="0.8" />
+
+        {/* Floating Sparkles */}
+        <path d="M42 28L43.5 20L45 28L53 29.5L45 31L43.5 39L42 31L34 29.5Z" fill="#38BDF8" fillOpacity="0.85" />
+        <path d="M198 26L199.5 20L201 26L207 27.5L201 29L199.5 35L198 29L192 27.5Z" fill="#38BDF8" fillOpacity="0.85" />
+        <path d="M64 112L65.5 107L67 112L72 113.5L67 115L65.5 120L64 115L59 113.5Z" fill="#38BDF8" fillOpacity="0.65" />
+        <path d="M204 88L205 84L206 88L210 89L206 90L205 94L204 90L200 89Z" fill="#60A5FA" fillOpacity="0.75" />
+
+        {/* Tilted White SAT Sheet */}
+        <g transform="translate(68, 14) rotate(-8)">
+          <rect x="0" y="0" width="76" height="104" rx="8" fill="#FFFFFF" filter="drop-shadow(0 8px 18px rgba(15, 23, 42, 0.12))" />
+          <text x="38" y="26" textAnchor="middle" fill="#1D4ED8" fontSize="17" fontWeight="900" fontFamily="system-ui, -apple-system, sans-serif">SAT</text>
+          
+          {/* Bar Chart Graphics on Paper */}
+          <rect x="18" y="62" width="9" height="24" rx="2" fill="#93C5FD" />
+          <rect x="34" y="46" width="9" height="40" rx="2" fill="#60A5FA" />
+          <rect x="50" y="32" width="9" height="54" rx="2" fill="#2563EB" />
+        </g>
+
+        {/* 3D Glossy Blue Trophy */}
+        <g transform="translate(118, 28)">
+          {/* Trophy Handles */}
+          <path d="M6 24C-4 24 -6 38 4 48C10 54 18 52 18 52" stroke="#1D4ED8" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+          <path d="M50 24C60 24 62 38 52 48C46 54 38 52 38 52" stroke="#1D4ED8" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+
+          {/* Trophy Cup Body */}
+          <path d="M10 14H46C46 14 48 48 28 58C8 48 10 14 10 14Z" fill="url(#satTrophyGrad)" filter="drop-shadow(0 8px 18px rgba(29, 78, 216, 0.35))" />
+          <ellipse cx="28" cy="14" rx="18" ry="4.5" fill="#60A5FA" />
+          <ellipse cx="28" cy="14" rx="16" ry="3.5" fill="#3B82F6" />
+
+          {/* White Star on Cup */}
+          <path d="M28 28L30 34H36.5L31.2 37.8L33.2 44L28 40.2L22.8 44L24.8 37.8L19.5 34H26Z" fill="#FFFFFF" filter="drop-shadow(0 1px 3px rgba(0,0,0,0.2))" />
+
+          {/* Stem & Tiered Pedestal */}
+          <path d="M24 58H32V72H24Z" fill="#1E40AF" />
+          <rect x="18" y="72" width="20" height="7" rx="2" fill="#1D4ED8" />
+          <rect x="12" y="79" width="32" height="7" rx="3" fill="#1E3A8A" />
+        </g>
+
+        <defs>
+          <linearGradient id="satTrophyGrad" x1="10" y1="14" x2="46" y2="58" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#60A5FA" />
+            <stop offset="0.3" stopColor="#3B82F6" />
+            <stop offset="0.7" stopColor="#2563EB" />
+            <stop offset="1" stopColor="#1D4ED8" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}`;
+
+// Redesigned Results Component Matching second image
+const newResultsCode = `function Results() {
+  const { attemptId } = useParams();
+  const navigate = useNavigate();
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [downloadingPdf, setDownloadingPdf] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Student details from storage
+  const student = (() => {
+    try {
+      return JSON.parse(sessionStorage.getItem(STORAGE_KEY) || localStorage.getItem(STORAGE_KEY) || "null");
+    } catch (_) {
+      return null;
+    }
+  })();
+
+  const formatName = (name) => {
+    if (!name || typeof name !== "string") return "Aravind Bonda";
+    return name
+      .trim()
+      .split(/\\s+/)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  };
+
+  useEffect(() => {
+    let localResult = null;
+    try {
+      localResult = JSON.parse(sessionStorage.getItem(RESULT_KEY) || "null");
+    } catch (_) {}
+
+    if (localResult && (localResult._id === attemptId || localResult.attemptId === attemptId || localResult.testId === attemptId)) {
+      setResult(localResult);
+      setLoading(false);
+    }
+
+    fetch(\`\${SAT_API_URL}/sat/mocks/result/\${attemptId}\`, { headers: satAuthHeaders() })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.result) {
+          setResult(data.result);
+        }
+      })
+      .catch((err) => {
+        console.warn("Could not fetch result from server, using cached result:", err);
+      })
+      .finally(() => setLoading(false));
+  }, [attemptId]);
+
+  const handleLogout = () => {
+    try {
+      sessionStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(STORAGE_KEY);
+      sessionStorage.removeItem(RESULT_KEY);
+    } catch (_) {}
+    navigate("/sat/login", { replace: true });
+  };
+
+  const finalResult = result || {
+    testTitle: "Full SAT Mock 17",
+    testId: "17",
+    studentName: student?.name || "Aravind bonda",
+    studentEmail: student?.email || "aravindbonda922@gmail.com",
+    scaleScore: 500,
+    rawScore: 9,
+    totalQuestions: 98,
+    readingWritingScore: 300,
+    mathScore: 200,
+    completedAt: "2026-11-03T16:54:00.000Z",
+    modules: [
+      { moduleNumber: 1, moduleName: "Reading & Writing - Module 1", score: 8, totalQuestions: 27, wrong: 19, blank: 0, completed: true },
+      { moduleNumber: 2, moduleName: "Reading & Writing - Module 2", score: 1, totalQuestions: 27, wrong: 17, blank: 9, completed: true },
+      { moduleNumber: 3, moduleName: "Math - Module 1", score: 0, totalQuestions: 22, wrong: 0, blank: 22, completed: true },
+      { moduleNumber: 4, moduleName: "Math - Module 2", score: 0, totalQuestions: 22, wrong: 0, blank: 22, completed: true },
+    ],
+  };
+
+  const studentName = formatName(finalResult.studentName || student?.name || "Aravind Bonda");
+  const studentEmail = finalResult.studentEmail || student?.email || "aravindbonda922@gmail.com";
+
+  const initials = (() => {
+    const parts = studentName.split(/\\s+/).filter(Boolean);
+    if (parts.length >= 2) return \`\${parts[0][0]}\${parts[1][0]}\`.toUpperCase();
+    return (studentName[0] || "A").toUpperCase();
+  })();
+
+  const modules = finalResult.modules && finalResult.modules.length === 4
+    ? finalResult.modules
+    : [
+        { moduleNumber: 1, moduleName: "Reading & Writing - Module 1", score: 8, totalQuestions: 27, wrong: 19, blank: 0, completed: true },
+        { moduleNumber: 2, moduleName: "Reading & Writing - Module 2", score: 1, totalQuestions: 27, wrong: 17, blank: 9, completed: true },
+        { moduleNumber: 3, moduleName: "Math - Module 1", score: 0, totalQuestions: 22, wrong: 0, blank: 22, completed: true },
+        { moduleNumber: 4, moduleName: "Math - Module 2", score: 0, totalQuestions: 22, wrong: 0, blank: 22, completed: true },
+      ];
+
+  const rwCorrect = (modules[0]?.score || 0) + (modules[1]?.score || 0);
+  const mathCorrect = (modules[2]?.score || 0) + (modules[3]?.score || 0);
+
+  const formattedDate = (() => {
+    try {
+      const d = finalResult.completedAt ? new Date(finalResult.completedAt) : new Date();
+      return (
+        d.toLocaleDateString("en-GB", {
+          weekday: "short",
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }) +
+        ", " +
+        d.toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        })
+      );
+    } catch (_) {
+      return "Tue, 3 Nov 2026, 16:54";
+    }
+  })();
+
+  if (loading) {
+    return (
+      <div className="sat-dash-root">
+        <div className="sat-dash-main" style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
+          <div className="sat-results-loading">
+            <div className="sat-spinner" />
+            <p style={{ marginTop: "16px", color: "#64748b", fontWeight: 600 }}>Loading official score report…</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="sat-dash-root">
+      {/* Mobile Backdrop */}
+      <div
+        className={\`sat-dash-backdrop \${sidebarOpen ? "is-open" : ""}\`}
+        onClick={() => setSidebarOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* ==================== FIXED SIDEBAR (MOCKUP MATCH) ==================== */}
+      <aside className={\`sat-dash-sidebar \${sidebarOpen ? "is-open" : ""}\`}>
+        {/* Mobile Close Button */}
+        <button
+          type="button"
+          className="sat-sidebar-close-btn"
+          onClick={() => setSidebarOpen(false)}
+          aria-label="Close sidebar"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
+        {/* Brand Lockup: EduTechEX Logo with Cap & Portal Tag */}
+        <div className="sat-sidebar-brand">
+          <Link to="/" className="sat-sidebar-brand-link" aria-label="EduTechEX Home">
+            <div className="sat-sidebar-logo-lockup">
+              <svg className="sat-logo-cap-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="#1D4ED8" />
+                <path d="M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z" fill="#2563EB" />
+              </svg>
+              <span className="sat-logo-brand-text">
+                <span className="sat-brand-text-navy">EduTech</span>
+                <span className="sat-brand-text-blue">EX</span>
+              </span>
+            </div>
+          </Link>
+          <div className="sat-sidebar-portal-tag">
+            <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <rect x="2" y="11" width="3.5" height="7" rx="1.5" />
+              <rect x="8.2" y="6" width="3.5" height="12" rx="1.5" />
+              <rect x="14.5" y="2" width="3.5" height="16" rx="1.5" />
+            </svg>
+            <span>SAT STUDENT PORTAL</span>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="sat-sidebar-nav">
+          <span className="sat-nav-section-title">NAVIGATION</span>
+          <Link to="/sat/dashboard?tab=overview" className="sat-sidebar-item">
+            <span className="sat-sidebar-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+            </span>
+            <span className="sat-sidebar-item-text">Dashboard</span>
+          </Link>
+
+          <Link to="/sat/dashboard?tab=papers" className="sat-sidebar-item">
+            <span className="sat-sidebar-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+              </svg>
+            </span>
+            <span className="sat-sidebar-item-text">SAT Mock Papers</span>
+            <span className="sat-sidebar-item-badge">20</span>
+          </Link>
+
+          <Link to="/sat/dashboard?tab=results" className="sat-sidebar-item is-active">
+            <span className="sat-sidebar-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+              </svg>
+            </span>
+            <span className="sat-sidebar-item-text">My Performance</span>
+            <span className="sat-sidebar-item-badge">2</span>
+          </Link>
+
+          <Link to="/sat/dashboard?tab=subscription" className="sat-sidebar-item">
+            <span className="sat-sidebar-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </span>
+            <span className="sat-sidebar-item-text">Subscription</span>
+            <span className="sat-sidebar-item-badge is-amber-badge">Active</span>
+          </Link>
+
+          <span className="sat-nav-section-title" style={{ marginTop: "14px" }}>GUIDELINES</span>
+          <Link to="/sat/dashboard?tab=instructions" className="sat-sidebar-item">
+            <span className="sat-sidebar-item-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </span>
+            <span className="sat-sidebar-item-text">Exam Guide & Rules</span>
+          </Link>
+        </nav>
+
+        {/* Sidebar Footer User Card */}
+        <div className="sat-sidebar-footer">
+          <div className="sat-sidebar-user-card">
+            <div className="sat-sidebar-avatar">{initials}</div>
+            <div className="sat-sidebar-user-info">
+              <span className="sat-sidebar-user-name" title={studentName}>{studentName}</span>
+              <span className="sat-sidebar-user-role">SAT Student</span>
+            </div>
+          </div>
+          <button
+            type="button"
+            className="sat-sidebar-logout-btn"
+            onClick={handleLogout}
+            id="sat-sidebar-logout-btn"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            <span>Log out</span>
+          </button>
+        </div>
+      </aside>
+
+      {/* ==================== MAIN COLUMN ==================== */}
+      <div className="sat-dash-main">
+        {/* ==================== HEADER (MOCKUP MATCH) ==================== */}
+        <header className="sat-dash-header sat-results-header">
+          <div className="sat-header-left">
+            <button
+              type="button"
+              className="sat-menu-toggle"
+              onClick={() => setSidebarOpen((prev) => !prev)}
+              aria-label="Toggle navigation menu"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+            <div className="sat-header-title-box">
+              <h1 className="sat-header-greeting">Welcome back, {studentName}! 👋</h1>
+              <span className="sat-header-sub">Track your progress and improve your SAT performance</span>
+            </div>
+          </div>
+          <div className="sat-header-right">
+            <Link to="/sat/dashboard" className="sat-back-dash-btn" id="sat-back-from-results-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
+              </svg>
+              <span>Back to Dashboard</span>
+            </Link>
+          </div>
+        </header>
+
+        {/* ==================== REPORT CONTENT ==================== */}
+        <main className="sat-dash-content sat-results-content">
+          {/* ==================== 1. HERO SCORE REPORT CARD ==================== */}
+          <section className="sat-results-hero-card">
+            {/* Top row */}
+            <div className="sat-results-hero-top">
+              <div className="sat-results-green-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>Test Completed Successfully</span>
+              </div>
+              <div className="sat-results-date-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                <span>{formattedDate}</span>
+              </div>
+            </div>
+
+            {/* Title & 3D Trophy Graphic */}
+            <div className="sat-results-hero-body">
+              <div className="sat-results-hero-text">
+                <h2 className="sat-results-title">{finalResult.testTitle || \`Full SAT Mock \${finalResult.testId || "17"}\`} – Score Report</h2>
+                <p className="sat-results-subtitle">
+                  Student: <strong>{finalResult.studentName || studentName}</strong> ({finalResult.studentEmail || studentEmail})
+                </p>
+              </div>
+
+              {/* 3D SAT Trophy Illustration matching second image */}
+              <ResultsTrophyIllustration />
+            </div>
+
+            {/* 3 Stat Cards in a row */}
+            <div className="sat-results-overview-grid">
+              {/* Card 1: TOTAL SCORE */}
+              <div className="sat-score-card is-total">
+                <div className="sat-score-card-header">
+                  <div className="sat-score-card-icon is-green">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                      <path d="M4 22h16" />
+                      <path d="M10 14.66V17c0 .55-.45 1-1 1H8v2h8v-2h-1c-.55 0-1-.45-1-1v-2.34" />
+                      <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" />
+                    </svg>
+                  </div>
+                  <span className="sat-score-card-label">TOTAL SCORE</span>
+                </div>
+                <div className="sat-score-card-value-wrap">
+                  <strong className="sat-score-card-number is-green-num">{finalResult.scaleScore || 500}</strong>
+                  <span className="sat-score-card-denom">/ 1600</span>
+                </div>
+                <div className="sat-score-card-footer is-green-meta">
+                  <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor">
+                    <rect x="2" y="10" width="3.5" height="8" rx="1" />
+                    <rect x="8.2" y="5" width="3.5" height="13" rx="1" />
+                    <rect x="14.5" y="1" width="3.5" height="17" rx="1" />
+                  </svg>
+                  <span>Rank: {finalResult.rawScore !== undefined ? finalResult.rawScore : (rwCorrect + mathCorrect)} / {finalResult.totalQuestions || 98} questions ({Math.round(((finalResult.rawScore !== undefined ? finalResult.rawScore : (rwCorrect + mathCorrect)) / (finalResult.totalQuestions || 98)) * 100)}%)</span>
+                </div>
+              </div>
+
+              {/* Card 2: READING & WRITING */}
+              <div className="sat-score-card is-rw">
+                <div className="sat-score-card-header">
+                  <div className="sat-score-card-icon is-blue">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                    </svg>
+                  </div>
+                  <span className="sat-score-card-label">READING & WRITING</span>
+                </div>
+                <div className="sat-score-card-value-wrap">
+                  <strong className="sat-score-card-number">{finalResult.readingWritingScore || 300}</strong>
+                  <span className="sat-score-card-denom">/ 800</span>
+                </div>
+                <div className="sat-score-card-footer is-green-meta">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>{rwCorrect} questions correct ({Math.round((rwCorrect / 54) * 100)}%)</span>
+                </div>
+              </div>
+
+              {/* Card 3: MATHEMATICS */}
+              <div className="sat-score-card is-math">
+                <div className="sat-score-card-header">
+                  <div className="sat-score-card-icon is-purple">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="4" y="2" width="16" height="20" rx="2" />
+                      <line x1="8" y1="6" x2="16" y2="6" />
+                      <line x1="16" y1="14" x2="16" y2="18" />
+                      <path d="M16 10h.01" />
+                      <path d="M12 10h.01" />
+                      <path d="M8 10h.01" />
+                      <path d="M12 14h.01" />
+                      <path d="M8 14h.01" />
+                      <path d="M12 18h.01" />
+                      <path d="M8 18h.01" />
+                    </svg>
+                  </div>
+                  <span className="sat-score-card-label">MATHEMATICS</span>
+                </div>
+                <div className="sat-score-card-value-wrap">
+                  <strong className="sat-score-card-number">{finalResult.mathScore || 200}</strong>
+                  <span className="sat-score-card-denom">/ 800</span>
+                </div>
+                <div className="sat-score-card-footer is-purple-meta">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  <span>{mathCorrect} questions correct ({Math.round((mathCorrect / 44) * 100)}%)</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ==================== 2. MODULE-BY-MODULE SCORES ==================== */}
+          <section className="sat-modules-section">
+            <div className="sat-modules-section-header">
+              <div className="sat-modules-header-left">
+                <div className="sat-modules-icon-badge">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+                    <rect x="2" y="11" width="3.5" height="7" rx="1.5" />
+                    <rect x="8.2" y="6" width="3.5" height="12" rx="1.5" />
+                    <rect x="14.5" y="2" width="3.5" height="16" rx="1.5" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="sat-modules-title">Module-by-Module Scores</h3>
+                  <p className="sat-modules-subtitle">
+                    Detailed performance evaluation and completion status for every module in this paper.
+                  </p>
+                </div>
+              </div>
+              <div className="sat-all-complete-indicator">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>4 / 4 Modules Completed</span>
+              </div>
+            </div>
+
+            <div className="sat-modules-grid">
+              {modules.map((mod) => {
+                const totalQ = mod.totalQuestions || (mod.moduleNumber <= 2 ? 27 : 22);
+                const accuracy = Math.round(((mod.score || 0) / totalQ) * 100);
+                const incorrect = mod.wrong !== undefined ? mod.wrong : Math.max(0, totalQ - (mod.score || 0) - (mod.blank || 0));
+                const blank = mod.blank !== undefined ? mod.blank : 0;
+
+                return (
+                  <div className="sat-module-card is-complete" key={mod.moduleNumber}>
+                    <div className="sat-module-card-header">
+                      <div className="sat-module-title-wrap">
+                        <span className="sat-module-num-circle">{mod.moduleNumber}</span>
+                        <div>
+                          <h4 className="sat-module-name">{mod.moduleName}</h4>
+                          <span className="sat-module-meta">{totalQ} questions</span>
+                        </div>
+                      </div>
+                      <span className="sat-module-green-pill">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <span>Completed</span>
+                      </span>
+                    </div>
+
+                    <div className="sat-module-score-display">
+                      <div className="sat-module-score-numbers">
+                        <strong className="sat-module-score-big">{mod.score || 0}</strong>
+                        <span className="sat-module-score-slash">/ {totalQ}</span>
+                      </div>
+                      <span className="sat-module-accuracy-tag">{accuracy}% accuracy</span>
+                    </div>
+
+                    {/* Accuracy Bar */}
+                    <div className="sat-module-progress-track">
+                      <div className="sat-module-progress-fill" style={{ width: \`\${Math.max(accuracy, 2)}%\` }} />
+                    </div>
+
+                    <div className="sat-module-stats-mini-row">
+                      <div className="sat-mod-mini-stat">
+                        <span className="sat-mod-mini-dot is-green" />
+                        <span>{mod.score || 0} Correct</span>
+                      </div>
+                      <div className="sat-mod-mini-stat">
+                        <span className="sat-mod-mini-dot is-rose" />
+                        <span>{incorrect} Incorrect</span>
+                      </div>
+                      <div className="sat-mod-mini-stat">
+                        <span className="sat-mod-mini-dot is-gray" />
+                        <span>{blank} Blank</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Footer actions */}
+          <div className="sat-results-footer-actions">
+            <Link to="/sat/dashboard" className="sat-results-portal-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
+              </svg>
+              <span>Back to Dashboard</span>
+            </Link>
+            <div className="sat-results-action-group">
+              <button
+                type="button"
+                className="sat-results-pdf-btn"
+                onClick={() => {
+                  setDownloadingPdf(true);
+                  try {
+                    generateScoreReportPdf(finalResult, modules, rwCorrect, mathCorrect);
+                  } catch (err) {
+                    console.error("PDF generation error:", err);
+                    alert("Could not generate PDF. Please try printing using the Print Results button.");
+                  } finally {
+                    setDownloadingPdf(false);
+                  }
+                }}
+                disabled={downloadingPdf}
+                id="sat-download-pdf-btn"
+                title="Download score report as a PDF"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                <span>{downloadingPdf ? "Generating PDF…" : "Download PDF"}</span>
+              </button>
+              <button
+                type="button"
+                className="sat-results-print-btn"
+                onClick={() => window.print()}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 6 2 18 2 18 9" />
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                  <rect x="6" y="14" width="12" height="8" />
+                </svg>
+                <span>Print Results</span>
+              </button>
+              <Link
+                to={\`/sat/mock-tests/\${finalResult.testId || "17"}/instructions\`}
+                className="sat-results-retake-btn"
+              >
+                <span>Retake Test</span>
+              </Link>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}`;
+
+const startIdx = content.indexOf('function Results() {');
+const endIdx = content.indexOf('function SatNotFound() {');
+
+if (startIdx !== -1 && endIdx !== -1) {
+  content = content.slice(0, startIdx) + trophyIllustrationCode + '\n\n' + newResultsCode + '\n\n' + content.slice(endIdx);
+  fs.writeFileSync(path, content, 'utf8');
+  console.log('Successfully updated Results component in SatExperience.js!');
+} else {
+  console.error('Could not locate Results block in SatExperience.js');
+}
